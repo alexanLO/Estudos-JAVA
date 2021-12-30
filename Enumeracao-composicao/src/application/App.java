@@ -35,7 +35,7 @@ public class App {
         System.out.print("Status: ");
         OrderStatus status = OrderStatus.valueOf(sc.next());
 
-        Order order = new Order((java.sql.Date) new Date(), status, client);
+        Order order = new Order(new Date(), status, client);
 
         System.out.print("Quantos produtos tem o seu pedido? ");
         int n = sc.nextInt();
@@ -47,10 +47,10 @@ public class App {
             sc.nextLine();
             System.out.print("Preço: ");
             double productPrice = sc.nextDouble();
-            
+
             Product product = new Product(productName, productPrice);
-            
-            System.out.print("Quantidade");
+
+            System.out.print("Quantidade: ");
             int quantity = sc.nextInt();
 
             OrderItem orderItem = new OrderItem(quantity, productPrice, product);
@@ -58,6 +58,11 @@ public class App {
             order.addProduct(orderItem);
         }
 
+        // IMPRIMINDO NA TELA
+
+        System.out.println();
+        System.out.println("Resumo do pedido:");
+        System.out.println(order);
         sc.close();
     }
 }

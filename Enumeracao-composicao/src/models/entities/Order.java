@@ -1,6 +1,6 @@
 package models.entities;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import models.enums.OrderStatus;
 
 public class Order {
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     private Date momentDate;
     private OrderStatus status;
@@ -42,12 +42,39 @@ public class Order {
         this.status = status;
     }
 
-    public void addProduct(OrderItem item){
+    public void addProduct(OrderItem item) {
         items.add(item);
     }
 
-    public void removeProduct(OrderItem item){
+    public void removeProduct(OrderItem item) {
         items.remove(item);
+    }
+
+    public double total() {
+        double sum = 0.0;
+        for (OrderItem item : items) {
+            sum += item.subTotal();
+        }
+        return sum;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Momento do pedido: ");
+        sb.append(sdf.format(momentDate) + "\n");
+        sb.append("Status do pedido: ");
+        sb.append(status + "\n");
+        sb.append("Cliente: ");
+        sb.append(client + "\n");
+        sb.append("Items do Pedido: /n");
+        for (OrderItem item : items) {
+            sb.append(item + "\n");
+        }
+        sb.append("Preço total: $");
+        sb.append(String.format("%.2f", total()));
+        return sb.toString();
     }
 
 }

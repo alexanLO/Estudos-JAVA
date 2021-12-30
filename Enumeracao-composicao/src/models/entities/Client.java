@@ -1,8 +1,11 @@
 package models.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Client {
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String name;
     private String email;
     private Date birthdDate;
@@ -36,5 +39,10 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString(){
+        return name + " (" + sdf.format(birthdDate) + ") - " + email; 
     }
 }
