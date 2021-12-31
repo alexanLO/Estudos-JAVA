@@ -71,6 +71,7 @@ public class App {
 
         }
 
+        //concerta erro de impressao
 
 		System.out.println();
 		System.out.println("PRICE TAGS:");
