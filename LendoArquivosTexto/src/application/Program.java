@@ -28,9 +28,9 @@ public class Program {
 
 		File sourceFile = new File(sourceFileStr);
 		String sourceFolderStr = sourceFile.getParent();
-		
+
 		boolean success = new File(sourceFolderStr + "\\out").mkdir();
-		
+
 		String targetFileStr = sourceFolderStr + "\\out\\summary.csv";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(sourceFileStr))) {
@@ -38,7 +38,11 @@ public class Program {
 			String itemCsv = br.readLine();
 			while (itemCsv != null) {
 
-				String[] fields = itemCsv.split(",");
+				String[] fields = itemCsv.split(","); // isso separa os arquivos por cada virgula fazendo com que por
+														// exemplo dentro do arquivo csv vai ter essas informaçoes {TV,
+														// 1000, 3}
+				// então aqui vai virar uma array onde TV = 0 | 1000 = 1 | 3 = 2, que são as
+				// posições dentro da array.
 				String name = fields[0];
 				double price = Double.parseDouble(fields[1]);
 				int quantity = Integer.parseInt(fields[2]);
@@ -56,7 +60,7 @@ public class Program {
 				}
 
 				System.out.println(targetFileStr + " CREATED!");
-				
+
 			} catch (IOException e) {
 				System.out.println("Error writing file: " + e.getMessage());
 			}
