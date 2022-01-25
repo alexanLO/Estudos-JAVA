@@ -1,13 +1,12 @@
 package models.entities.figure;
 
-import models.entities.Shape;
 import models.enums.Color;
 
-public class Rectangle extends Shape{
+public class Rectangle extends AbstractShape {
 
     private Double width;
     private Double height;
-    
+
     public Rectangle(Color color, Double width, Double height) {
         super(color);
         this.width = width;
@@ -39,10 +38,10 @@ public class Rectangle extends Shape{
     public double area() {
         return width * height;
     }
-    
+
     @Override
-    public String toString(){
-        return "RETANGULO: " + "Cor: " + getColor() + "| Base: " + width + "| Altura: " + height; 
+    public String toString() {
+        return "RETANGULO: " + "Cor: " + getColor() + "| Base: " + width + "| Altura: " + height;
     }
 
 }
