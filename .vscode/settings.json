@@ -1,0 +1,6 @@
+{
+    "java.project.sourcePaths": [
+        "BancoDeDadosJDBC-deletarDados/src",
+        "Banco-de-Dados-jdbc/BancoDeDadosJDBC-transação/src/application"
+    ]
+}
