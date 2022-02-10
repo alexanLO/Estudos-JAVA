@@ -1,45 +1,66 @@
 package gui;
 
 import java.net.URL;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import gui.util.Constraints;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
+import models.entities.Person;
 
-public class ViewController implements Initializable{
-
-    @FXML
-    private TextField txtNumberOne;
-
-    @FXML
-    private TextField txtNumberTwo;
+public class ViewController implements Initializable {
 
     @FXML
-    private Label labelResult;
+    private ComboBox<Person> comboBoxPerson;
+
+    private ObservableList<Person> obsList;
 
     @FXML
     private Button button;
 
+    @FXML  
+    public void onButtonAction(){
+        for (Person person : obsList) {
+            System.out.println(person);
+        }
+    }
+
+
     @FXML
-    public void onButtonSumAction() {
-        double numberOne = Double.parseDouble(txtNumberOne.getText());
-        double numberTwo = Double.parseDouble(txtNumberTwo.getText());
-        double sum = numberOne + numberTwo;
-        labelResult.setText(String.format(Locale.US, "%.2f", sum));
+    public void onComboBoxPersonAction(){
+        Person person = comboBoxPerson.getSelectionModel().getSelectedItem();
+        System.out.println(person);
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle rb) {
-        Constraints.setTextFieldDouble(txtNumberOne);
-        Constraints.setTextFieldDouble(txtNumberTwo);
-        Constraints.setTextFieldMaxLength(txtNumberOne, 12);
-        Constraints.setTextFieldMaxLength(txtNumberTwo, 12);
+        List<Person> persons = new ArrayList<>();
+        persons.add(new Person(1, "Maria", "maria@gmail.com"));
+        persons.add(new Person(1, "Bob", "bob@gmail.com"));
+        persons.add(new Person(1, "Joana", "joana@gmail.com"));
+        persons.add(new Person(1, "Raissa", "Raissa@gmail.com"));
+
+        obsList = FXCollections.observableList(persons);
+        comboBoxPerson.setItems(obsList);
         
+
+        Callback<ListView<Person>, ListCell<Person>> factory = lv -> new ListCell<Person>() {
+            @Override
+            protected void updateItem(Person item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(empty ? "" : item.getName());
+            }
+            };
+            comboBoxPerson.setCellFactory(factory);
+            comboBoxPerson.setButtonCell(factory.call(null));
     }
 
 }
