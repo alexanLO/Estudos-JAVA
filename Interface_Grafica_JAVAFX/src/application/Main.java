@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage){
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/gui/View.fxml"));
 
